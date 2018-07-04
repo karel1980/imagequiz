@@ -1,0 +1,25 @@
+<h1>Quiz</h1>
+
+<div *ngIf="done">
+	<div>
+	The quiz is done. <button (click)="reset()">Start again?</button>
+	</div>
+
+	<div>
+		Answers:
+
+		<div *ngFor="let image of images; index as idx">
+			<h1>{{image.imageId}} - {{image.description}}</h1>
+			<h3>(You guessed "{{answers[idx]}}")</h3>
+			<img src="/assets/{{image.imageId}}"/>
+		</div>
+	</div>
+</div>
+<div *ngIf="!done">
+	<button (click)="reset()">Start over</button>
+	<p>Current question: {{answered + 1 }}</p>
+
+	<app-question [image]="currentImage" [question]="currentQuestion"
+		(answer)="onAnswer($event)"></app-question>
+
+</div>
